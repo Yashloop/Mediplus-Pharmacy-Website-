@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medi Plus+ | Comprehensive Healthcare Solution</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #f4f7f6;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      /* Header Styles */
+      .header {
+        background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 50px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .logo-container {
+        display: flex;
+        align-items: center;
+      }
+      .logo-container img {
+        width: 50px;
+        margin-right: 10px;
+      }
+      .search-container {
+        display: flex;
+        align-items: center;
+        background-color: #f1f3f4;
+        border-radius: 24px;
+        padding: 5px 15px;
+        width: 400px;
+      }
+      .search-container input {
+        border: none;
+        background: transparent;
+        width: 100%;
+        padding: 5px;
+      }
+      .search-container i {
+        color: #5f6368;
+        margin-right: 10px;
+      }
+      .navigation {
+        display: flex;
+        gap: 20px;
+      }
+      .navigation a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      .navigation a:hover {
+        color: #2c3e50;
+      }
+
+      .banner {
+        width: 100%;
+        height: 250px; /* Reduced banner size */
+        overflow: hidden;
+      }
+      .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .categories-nav {
+        display: flex;
+        justify-content: center;
+        background-color: #f8f9fa;
+        padding: 15px 0;
+      }
+      .categories-nav a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+      .categories-nav a:hover {
+        color: #2c3e50;
+      }
+
+      .medicine-sections {
+        padding: 20px 50px;
+      }
+      .medicine-category {
+        margin-bottom: 30px;
+      }
+      .medicine-category h2 {
+        margin-bottom: 15px;
+        text-align: center;
+        color: #2c3e50;
+      }
+      .medicine-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .medicine-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .medicine-card {
+        flex: 0 0 250px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        scroll-snap-align: start;
+        transition: transform 0.3s;
+        position: relative;
+        border: 1px solid #e0e0e0;
+      }
+      .medicine-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      .medicine-card-image {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4;
+        padding: 15px;
+      }
+      .medicine-card-image img {
+        max-width: 100%;
+        max-height: 150px;
+        object-fit: contain;
+      }
+      .medicine-card-details {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+      .medicine-card-details h3 {
+        color: #2c3e50;
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .medicine-card-details p {
+        color: #666;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+      .medicine-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e0e0e0;
+      }
+      .price {
+        font-weight: bold;
+        color: #27ae60;
+        font-size: 16px;
+      }
+      .rating {
+        color: #f39c12;
+        display: flex;
+        align-items: center;
+      }
+      .rating i {
+        margin-right: 3px;
+      }
+      .buy-button {
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 14px;
+      }
+      .buy-button:hover {
+        background-color: #34495e;
+      }
+
+      .footer {
+        background-color: #2c3e50;
+        color: #ffffff;
+        padding: 50px 0;
+      }
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-section {
+        flex: 1;
+        padding: 0 15px;
+      }
+      .footer-section h3 {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ffffff;
+        padding-bottom: 10px;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .contact-form button {
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .contact-form button:hover {
+        background-color: #219653;
+      }
+      .social-icons a {
+        color: white; /* Changed social icon link color to white */
+        margin-right: 15px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with Search Bar -->
+    <header class="header">
+      <!-- Logo Section -->
+      <div class="logo-container">
+        <img
+          src="neww img/WhatsApp Image 2024-12-06 at 15.44.37_20b90552.jpg"
+          alt="Medi Plus+ Logo"
+        />
+        <h1>Medi Plus+</h1>
+      </div>
+
+      <!-- Search Container -->
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          placeholder="Search medicines, healthcare products..."
+        />
+      </div>
+
+      <!-- Navigation -->
+      <nav class="navigation">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+      </nav>
+    </header>
+
+    <!-- Categories Navigation -->
+    <nav class="categories-nav">
+      <a href="#heart-care">Heart Care</a>
+      <a href="#thyroid-care">Thyroid Care</a>
+      <a href="#baby-products">Baby Products</a>
+      <a href="#vitamins">Vitamins</a>
+      <a href="#bone-health">Bone Health</a>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner">
+      <img src="neww img/banner.jpg.png" alt="Healthcare Banner" />
+    </section>
+
+    <!-- Medicine Sections -->
+    <section class="medicine-sections">
+      <!-- Heart Care Section -->
+      <div class="medicine-category" id="heart-care">
+        <h2>Heart Care</h2>
+        <div class="medicine-grid">
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/cardio.webp" alt="CardioProtect Tablet" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>CardioProtect Tablet</h3>
+              <p>Advanced Heart Support Formula</p>
+              <p>Reduces cholesterol & supports cardiovascular health</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹39.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/heart.jpeg" alt="Heart Rhythm Stabilizer" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Heart Rhythm Stabilizer</h3>
+              <p>Regulates Cardiac Pulse</p>
+              <p>Natural herbal composition for heart rhythm</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹45.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.2</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/ome.jpg" alt="Omega Heart Support" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Omega Heart Support</h3>
+              <p>Essential Fatty Acid Complex</p>
+              <p>Promotes heart health and reduces inflammation</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹34.75</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.7</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/blood.jpeg" alt="Blood Pressure Control" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Blood Pressure Control</h3>
+              <p>Natural Hypertension Management</p>
+              <p>Helps maintain healthy blood pressure levels</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹49.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.3 </span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/cho.jpeg" alt="Cholesterol Guard" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Cholesterol Guard</h3>
+              <p>Lipid Level Regulator</p>
+              <p>Scientifically formulated to control cholesterol</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹42.25</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.6</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vitamins Section -->
+      <div class="medicine-category" id="vitamins">
+        <h2>Vitamin Supplements</h2>
+        <div class="medicine-grid">
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/1.jpeg" alt="Complete Multivitamin Complex" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Complete Multivitamin Complex</h3>
+              <p>Comprehensive Nutritional Support</p>
+              <p>Daily essential vitamins and minerals</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹29.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.8</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/2.jpeg" alt="Advanced Vitamin D3" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Advanced Vitamin D3</h3>
+              <p>Immune & Bone Health Booster</p>
+              <p>High potency vitamin D supplement</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹19.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/3.jpeg" alt="Vitamin B Complex" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Vitamin B Complex</h3>
+              <p>Energy & Metabolism Support</p>
+              <p>Comprehensive B vitamin formula</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹24.75</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.4</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/4.jpeg" alt="Vitamin C Immunity Boost" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Vitamin C Immunity Boost</h3>
+              <p>Advanced Immune Protection</p>
+              <p>Enhanced absorption formula</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹22.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.7</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/5.jpeg" alt="Vitamin E Antioxidant" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Vitamin E Antioxidant</h3>
+              <p>Cellular Protection Formula</p>
+              <p>Natural skin and heart health support</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹26.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.6</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bone Health Section -->
+      <div class="medicine-category" id="bone-health">
+        <h2>Bone Health Supplements</h2>
+        <div class="medicine-grid">
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/11.jpeg" alt="Calcium Plus Supplement" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Calcium Plus Supplement</h3>
+              <p>Advanced Bone Density Support</p>
+              <p>With added Vitamin D and Magnesium</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹34.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/22.jpeg" alt="Bone Strength Formula" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Bone Strength Formula</h3>
+              <p>Comprehensive Bone Nutrition</p>
+              <p>Supports joint and skeletal health</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹39.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.3</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/33.jpeg" alt="Calcium Magnesium Complex" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Calcium Magnesium Complex</h3>
+              <p>Mineral Bone Support</p>
+              <p>Enhanced absorption technology</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹32.75</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.4</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/44.jpeg" alt="Osteo Protect" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Osteo Protect</h3>
+              <p>Advanced Bone Preservation</p>
+              <p>Helps prevent age-related bone loss</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹44.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.6</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/55.jpeg" alt="Joint Flex Support" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Joint Flex Support</h3>
+              <p>Mobility and Flexibility Formula</p>
+              <p>Supports cartilage and joint health</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹37.25</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thyroid Care Section -->
+      <div class="medicine-category" id="thyroid-care">
+        <h2>Thyroid Care</h2>
+        <div class="medicine-grid">
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/a.jpeg" alt="Thyro Balance Capsules" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Thyro Balance Capsules</h3>
+              <p>Hormone Regulation Support</p>
+              <p>Helps maintain optimal thyroid function</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹44.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b.jpeg" alt="Iodine Complex" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Iodine Complex</h3>
+              <p>Thyroid Mineral Supplement</p>
+              <p>Essential nutrients for thyroid health</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹37.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.3</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/c.jpeg" alt="Metabolism Booster" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Metabolism Booster</h3>
+              <p>Thyroid Function Enhancer</p>
+              <p>Supports metabolic rate and energy levels</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹52.25</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.6</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/download.jpeg" alt="Thyroid Support Complex" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Thyroid Support Complex</h3>
+              <p>Comprehensive Thyroid Care</p>
+              <p>Natural ingredients for hormonal balance</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹46.75</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.4</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/e.jpeg" alt="Hormone Harmony" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Hormone Harmony</h3>
+              <p>Endocrine System Regulator</p>
+              <p>Balances thyroid and metabolic functions</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹49.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Baby Products Section -->
+      <div class="medicine-category" id="baby-products">
+        <h2>Baby Products</h2>
+        <div class="medicine-grid">
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b1.jpeg" alt="Baby Multivitamin Drops" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Baby Multivitamin Drops</h3>
+              <p>Comprehensive Nutrition Support</p>
+              <p>Essential vitamins for infant growth</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹22.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.8</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b2.jpeg" alt="Infant Immunity Booster" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Infant Immunity Booster</h3>
+              <p>Immune System Enhancement</p>
+              <p>Natural defense mechanism support</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹29.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.6</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b3.jpeg" alt="Baby Digestive Syrup" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Baby Digestive Syrup</h3>
+              <p>Gut Health Formulation</p>
+              <p>Relieves colic and improves digestion</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹18.75</div>
+              <div class="rating">
+                <i class="fas fa -star"></i>
+                <span>4.4</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b4.jpeg" alt="Growth Supplement" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Growth Supplement</h3>
+              <p>Nutritional Development Support</p>
+              <p>Promotes healthy physical growth</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹34.99</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.7</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="medicine-card">
+            <div class="medicine-card-image">
+              <img src="neww img/b5.jpeg" alt="Teething Relief Gel" />
+            </div>
+            <div class="medicine-card-details">
+              <h3>Teething Relief Gel</h3>
+              <p>Soothing Oral Comfort</p>
+              <p>Natural ingredients for teething pain</p>
+            </div>
+            <div class="medicine-card-footer">
+              <div class="price">₹15.50</div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>4.5</span>
+              </div>
+              <button class="buy-button">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-section about">
+          <h3>About Medi Plus+</h3>
+          <p>
+            Committed to providing high-quality healthcare solutions and
+            medicines with utmost care and precision.
+          </p>
+        </div>
+        <div class="footer-section contact">
+          <h3>Contact Us</h3>
+          <p>Address: 123 Healthcare Street, Medical City</p>
+          <p>Phone: +1 (555) 123-4567</p>
+          <p>Email: support@mediplus.com</p>
+        </div>
+        <div class="footer-section contact-form">
+          <h3>Send Us a Message</h3>
+          <form>
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <textarea placeholder="Your Message" rows="4"></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+        <div class="footer-section social">
+          <h3>Connect With Us</h3>
+          <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
